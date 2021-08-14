@@ -38,4 +38,23 @@ def simulateGameOfLife(generations, gridSize, *squaresOn):
                 for arg in squaresOn:
                     if (arg == [x, y]):
                         isAlive = True
-                neighbors = 0
+                neighbors = []
+                neighbors.append([x+1, y+1])
+                neighbors.append([x+1, y])
+                neighbors.append([x+1, y-1])
+                neighbors.append([x, y+1])
+                neighbors.append([x, y-1])
+                neighbors.append([x-1, y+1])
+                neighbors.append([x-1, y])
+                neighbors.append([x-1, y-1])
+                numNeighbors = 0
+                for n in neighbors:
+                    for arg in squaresOn:
+                        if (arg == n):
+                            numNeighbors += 1
+                if (numNeighbors < 2 & isAlive == True):
+                    isAlive = False
+                if (numNeighbors > 4 & isAlive == True):
+                    isAlive = False
+                if (numNeighbors == 3 & isAlive == False):
+                    isAlive = True
