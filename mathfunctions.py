@@ -1,3 +1,5 @@
+import math
+
 ## The multiplicative persistence of a number
 def getMultiplicativePersistence(number):
     generations = 0
@@ -29,25 +31,33 @@ def simulate3xPlus1(number, isList=False):
     else:
         return generations
 
+## Returns random number between min and max (inclusive)
+def psuedoRandomNumberGenerator(min, max, seed, depth=5):
+    if (depth == 0):
+        x = str(seed**3)
+        x = x[0:6]
+        i = int(x)
+        while (i > max):
+            i -= max
+        while (i < min):
+            i += min
+        return i
+    else:
+        x = str(seed**3)
+        x = x[2:6]
+        i = int(x)
+        return psuedoRandomNumberGenerator(min, max, i, depth-1)
 
-def getFraction(frac_):
-    frac = frac_
-    numToAdd = 0
-    a = [0, 1]
-    b = [1, 1]
-    print("Starting")
-    print(frac)
-    while True:
-        new = [a[0] + b[0], a[1] + b[1]]
-        if frac < new[0]/new[1]:
-            b = new
-        elif frac == new[0]/new[1]:
-            return [new[0] + numToAdd * new[1], new[1]]
-        elif frac == 0:
-            return [0, 1]
-        elif frac == 1:
-            return [1, 1]
-        else:
-            a = new
-
-print(getFraction(0.20749838396))
+def dec2Hex(n):
+    result = ''
+    curNumber = n
+    hexDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
+    decDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    numDigits = 0
+    while n > 16**numDigits:
+        numDigits += 1
+    if (numDigits == 0):
+        return '0'
+    for i in range(numDigits):
+        x = numDigits-i
+        ## idk
